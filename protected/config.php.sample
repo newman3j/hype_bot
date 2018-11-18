@@ -1,0 +1,54 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: novichkov
+ * Date: 14.09.17
+ * Time: 12:53
+ */
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+//error_reporting(E_ALL);
+date_default_timezone_set('UTC');
+define('DEVELOPMENT_MODE', true);
+define('TEST_MODE', true);
+define('DS', DIRECTORY_SEPARATOR);
+define('SITE', 'https://winkl.shop/');
+if(!defined('ROOT_DIR')) {
+    define('ROOT_DIR', str_replace('public', '', rtrim(realpath($_SERVER['DOCUMENT_ROOT']), DS)));
+}
+define('SITE_DIR', 'https://' . str_replace('https://', '', $_SERVER['HTTP_HOST'] . '/'));
+define('DOMAIN', str_replace('https://', '', $_SERVER['HTTP_HOST']));
+if(count($arr = explode('.', $_SERVER['HTTP_HOST'])) > 2) {
+    $sub_domain = array_shift($arr);
+    define('SUB_DOMAIN', $sub_domain);
+}
+$project = 'shop';
+if(SUB_DOMAIN == 'admin') {
+    $project = 'admin';
+}
+if(SUB_DOMAIN == 'designer') {
+    $project = 'designer';
+}
+//echo SUB_DOMAIN;exit;
+
+define('PROJECT', $project);
+define('PROTECTED_DIR', ROOT_DIR . 'protected' . DS);
+define('CORE_DIR', PROTECTED_DIR . 'core' . DS);
+define('PUBLIC_DIR', ROOT_DIR . 'public' . DS);
+define('MAIN_SITE_DIR', 'https://' . str_replace('http://', '', implode('.', $arr) . '/'));
+define('TEMPLATE_DIR', PROTECTED_DIR . 'templates' . DS . PROJECT . DS);
+define('CONTROLLER_DIR', PROTECTED_DIR . 'controllers' . DS . PROJECT . DS);
+define('LIBS_DIR', PROTECTED_DIR . 'libs' . DS);
+define('IMAGE_DIR', SITE_DIR . '/images/' . PROJECT . '/');
+
+define('DB_NAME', 'winkl');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
+define('DB_HOST', 'localhost');
+define('APP_SECRET', '12345');
+
+define('SEND_GRID_API_KEY', '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');
+define('B2CPL_CLIENT', 'test');
+define('B2CPL_KEY', 'test');
+define('B2CPL_URL', 'http://is.b2cpl.ru/portal/client_api.ashx');
+define('B2CPL_POST_URL', 'http://api.b2cpl.ru/portal/client_api_post.ashx');
+define('WINKL_BOT', '561981981:AAGNXGtTDIcGARYDtRuR9CPgrBgxe8YaNDU');

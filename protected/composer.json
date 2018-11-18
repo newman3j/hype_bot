@@ -1,0 +1,9 @@
+{
+  "require": {
+    "sendgrid/sendgrid": "~6.0",
+    "litipk/php-bignumbers": "^0.8",
+    "mobiledetect/mobiledetectlib": "^2.8",
+    "irazasyed/telegram-bot-sdk": "^2.0",
+    "claviska/simpleimage": "^3.3"
+  }
+}
