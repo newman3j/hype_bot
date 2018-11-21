@@ -52,6 +52,11 @@ class router
     {
         self::admin();
     }
+
+    private function bot()
+    {
+        self::admin();
+    }
     
     private static function parseRoute()
     {

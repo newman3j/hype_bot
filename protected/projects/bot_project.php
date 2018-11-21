@@ -7,46 +7,9 @@
  */
 class bot_project extends controller
 {
-    const SCRIPT_SEPARATOR = '<!--pa-->';
     public function checkAuth($rules)
     {
-        if($rules['auth']) {
-            if($token = $_COOKIE['Authorization']) {
-                if($user_id = authorization::checkToken($token)) {
-                    if($user = $this->model('system_users')->getById($user_id)) {
-                        if($user['role_id'] == 3) {
-                            $this->unauthorized();
-                        }
-                        unset($user['user_password']);
-                        registry::set('user', $user);
-                        registry::set('auth', true);
-                        $this->user = $user;
-                        $token = authorization::generateToken($user['id']);
-                        setcookie('Authorization', $token, time() + 3600 * 24 * 30, '/');
-                        $this->response->withHeader('Authorization', $token);
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            }
-            return false;
-        } else {
-            if($token = $_COOKIE['Authorization']) {
-                if($user_id = authorization::checkToken($token)) {
-                    if($user = $this->model('system_users')->getById($user_id)) {
-
-                        $this->user = $user;
-                    }
-                    $token = authorization::generateToken($user_id);
-                    setcookie('Authorization', $token, time() + 3600 * 24 * 30, '/');
-                    $this->response->withHeader('Authorization', $token);
-                }
-            }
-            return true;
-        }
+       return true;
     }
 
     public function view_only($template)
@@ -57,26 +20,7 @@ class bot_project extends controller
 
     public function view($template)
     {
-        $this->common();
-        $this->render('breadcrumbs', $this->breadcrumbs);
-        $content = $this->fetch($template);
-        if(strpos($content, self::SCRIPT_SEPARATOR) !== false) {
-            $arr = explode(self::SCRIPT_SEPARATOR, $content);
-            $content = array_shift($arr);
-            $this->render('template_script', array_shift($arr));
-            if($arr) {
-                $this->render('template_style', array_shift($arr));
-            }
-        }
-        $this->render('template_content', $content);
-
-        $content = $this->fetch('common/frame');
-        $this->html($content);
-    }
-
-    protected function common()
-    {
-
+        return;
     }
 
     protected function unauthorized()
@@ -95,7 +39,7 @@ class bot_project extends controller
     {
         return [
             'auth' => false,
-            'allowed_methods' => ['POST'],
+            'allowed_methods' => ['POST', 'GET'],
         ];
     }
 
