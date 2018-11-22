@@ -1,1 +1,2 @@
 <?php
+print_r(json_decode('{"update_id":595248684,"message":{"message_id":6,"from":{"id":592252535,"is_bot":false,"first_name":"James OSBOURNE","username":"newman3j","language_code":"ru"},"chat":{"id":592252535,"first_name":"James OSBOURNE","username":"newman3j","type":"private"},"date":1542808110,"text":"\/start","entities":[{"offset":0,"length":6,"type":"bot_command"}]}}', true));
