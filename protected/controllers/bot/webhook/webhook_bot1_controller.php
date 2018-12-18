@@ -9,6 +9,9 @@ class webhook_bot1_controller extends bot_project
 		$arr = json_decode($raw, true);
 		$this->writeLog('test', $raw);
 		$this->writeLog('test', getallheaders());
+		if($arr['message']['entities'][0]['type'] === 'bot_command') {
+			$bot = new bot_commands_class($arr['message']);
+		}
 		$this->success();
 	}
 }
